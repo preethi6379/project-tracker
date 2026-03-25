@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useTaskStore } from '../store/useTaskStore'
-import type { Filters, Status, Priority } from '../types/task.types'
+import type { Status, Priority } from '../types/task.types'
 
 export function useUrlFilters() {
   const filters     = useTaskStore((state) => state.filters)
