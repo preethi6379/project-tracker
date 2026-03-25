@@ -10,7 +10,7 @@ export default function Layout({ children }: Props) {
   return (
     <div className="h-screen flex flex-col bg-gray-50 overflow-hidden">
 
-      {/* ── Top Bar ── */}
+
       <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
@@ -21,7 +21,7 @@ export default function Layout({ children }: Props) {
           </h1>
         </div>
 
-        {/* Live presence bar */}
+
         <PresenceBar />
       </div>
 

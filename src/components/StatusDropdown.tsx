@@ -24,7 +24,6 @@ export default function StatusDropdown({ taskId, currentStatus }: Props) {
   const config = STATUS_CONFIG[currentStatus]
 
   return (
-    // Native select styled to look like a badge
     <select
       value={currentStatus}
       onChange={(e) => updateTaskStatus(taskId, e.target.value as Status)}

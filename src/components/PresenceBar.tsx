@@ -2,8 +2,6 @@ import { usePresence } from '../hooks/usePresence'
 
 export default function PresenceBar() {
   const { activeUsers } = usePresence()
-
-  // Max 3 avatars shown, rest as +N
   const shown    = activeUsers.slice(0, 3)
   const overflow = activeUsers.length - shown.length
 
@@ -11,8 +9,6 @@ export default function PresenceBar() {
 
   return (
     <div className="flex items-center gap-2">
-
-      {/* Stacked avatars */}
       <div className="flex items-center">
         {shown.map((user, i) => (
           <div
@@ -20,7 +16,6 @@ export default function PresenceBar() {
             title={user.name}
             style={{
               backgroundColor: user.color,
-              // Stack avatars by pulling left
               marginLeft: i === 0 ? 0 : -8,
               zIndex:     shown.length - i,
             }}
@@ -35,8 +30,6 @@ export default function PresenceBar() {
             {user.initials}
           </div>
         ))}
-
-        {/* Overflow badge +N */}
         {overflow > 0 && (
           <div
             style={{ marginLeft: -8, zIndex: 0 }}
@@ -51,8 +44,6 @@ export default function PresenceBar() {
           </div>
         )}
       </div>
-
-      {/* Text */}
       <span className="text-xs text-gray-400 whitespace-nowrap">
         {activeUsers.length} viewing
       </span>

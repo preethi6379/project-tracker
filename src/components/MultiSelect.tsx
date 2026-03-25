@@ -3,13 +3,13 @@ import { useState, useRef, useEffect } from 'react'
 type Option = {
   value: string
   label: string
-  color?: string  // optional colour dot
+  color?: string  
 }
 
 type Props = {
-  label:     string        // button label e.g. "Status"
-  options:   Option[]      // list of choices
-  selected:  string[]      // currently selected values
+  label:     string        
+  options:   Option[]      
+  selected:  string[]      
   onChange:  (values: string[]) => void
 }
 
@@ -19,11 +19,10 @@ export default function MultiSelect({
   selected,
   onChange,
 }: Props) {
-  // Is dropdown open?
+ 
+  
   const [isOpen, setIsOpen] = useState(false)
   const containerRef        = useRef<HTMLDivElement>(null)
-
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (containerRef.current &&
@@ -35,13 +34,11 @@ export default function MultiSelect({
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Toggle one option on/off
+
   function toggleOption(value: string) {
     if (selected.includes(value)) {
-      // Remove from selected
       onChange(selected.filter((v) => v !== value))
     } else {
-      // Add to selected
       onChange([...selected, value])
     }
   }
@@ -50,8 +47,6 @@ export default function MultiSelect({
 
   return (
     <div ref={containerRef} className="relative">
-
-      {/* ── Trigger button ── */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
         className={`
@@ -65,20 +60,22 @@ export default function MultiSelect({
       >
         {label}
 
-        {/* Show count badge if items selected */}
+       
+       
         {hasSelection && (
           <span className="bg-indigo-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
             {selected.length}
           </span>
         )}
 
-        {/* Chevron */}
+
         <span className={`text-xs transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}>
           ˅
         </span>
       </button>
 
-      {/* ── Dropdown ── */}
+      
+      
       {isOpen && (
         <div className="
           absolute top-full left-0 mt-1 z-50
@@ -101,7 +98,8 @@ export default function MultiSelect({
                   }
                 `}
               >
-                {/* Checkbox */}
+                
+                
                 <div className={`
                   w-4 h-4 rounded border-2 flex items-center
                   justify-center shrink-0 transition-colors
@@ -115,7 +113,8 @@ export default function MultiSelect({
                   )}
                 </div>
 
-                {/* Colour dot if provided */}
+              
+              
                 {option.color && (
                   <div
                     className="w-2.5 h-2.5 rounded-full shrink-0"

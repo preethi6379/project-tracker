@@ -20,7 +20,7 @@ const DragGhost = forwardRef<HTMLDivElement, Props>(
       >
         {task && (
           <>
-            {/* ── Small cursor dot ── */}
+          
             <div
               style={{
                 position:        'absolute',
@@ -35,7 +35,7 @@ const DragGhost = forwardRef<HTMLDivElement, Props>(
               }}
             />
 
-            {/* ── Task name pill ── */}
+          
             <div
               style={{
                 position:        'absolute',

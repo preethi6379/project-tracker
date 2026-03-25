@@ -21,12 +21,8 @@ export default function TaskCard({
 }: Props) {
   const dateInfo    = getDueDateLabel(task.dueDate)
   const activeUsers = useTaskStore((state) => state.activeUsers)
-
-  // Users currently viewing THIS specific card
   const viewingUsers = activeUsers.filter((u) => u.taskId === task.id)
   const isBeingViewed = viewingUsers.length > 0
-
-  // ── Placeholder shown where card was grabbed ──
   if (isDragging) {
     return (
       <div
@@ -63,7 +59,6 @@ export default function TaskCard({
       `}
     >
 
-      {/* ── Priority colour bar at top ── */}
       <div className={`
         h-1 w-full rounded-full mb-2
         ${task.priority === 'critical' ? 'bg-red-400'    :
@@ -71,9 +66,6 @@ export default function TaskCard({
           task.priority === 'medium'   ? 'bg-yellow-400' :
           'bg-green-400'}
       `}/>
-
-      {/* ── Presence indicator bar ── */}
-      {/* Shows when someone is viewing this card */}
       {isBeingViewed && (
         <div className="
           flex items-center gap-1 mb-2
@@ -90,24 +82,14 @@ export default function TaskCard({
           </span>
         </div>
       )}
-
-      {/* ── Task title ── */}
       <p className="text-sm font-medium text-gray-900 mb-2 leading-snug">
         {task.title}
       </p>
-
-      {/* ── Priority badge ── */}
       <div className="mb-3">
         <PriorityBadge priority={task.priority} />
       </div>
-
-      {/* ── Bottom row — avatar + presence + due date ── */}
       <div className="flex items-center justify-between">
-
-        {/* Left side — assignee + viewers */}
         <div className="flex items-center gap-1">
-
-          {/* Assignee avatar */}
           <div
             title={task.assignee.name}
             className="
@@ -119,14 +101,10 @@ export default function TaskCard({
           >
             {task.assignee.initials}
           </div>
-
-          {/* Viewing users avatars */}
           {isBeingViewed && (
             <AvatarStack users={viewingUsers} />
           )}
         </div>
-
-        {/* Right side — due date */}
         <span className={`
           text-xs px-2 py-0.5 rounded-full whitespace-nowrap
           ${dateInfo.isCritical

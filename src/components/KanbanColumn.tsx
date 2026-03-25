@@ -79,10 +79,10 @@ export default function KanbanColumn({
         }
       `}
     >
-      {/* ── Coloured top accent bar ── */}
+
       <div className={`h-1.5 w-full rounded-t-2xl ${config.topBar}`} />
 
-      {/* ── Column Header ── */}
+      
       <div className={`
         flex items-center justify-center gap-2
         px-4 py-3 border-b
@@ -103,10 +103,10 @@ export default function KanbanColumn({
         </span>
       </div>
 
-      {/* ── Cards area ── */}
+      
       <div className="flex-1 overflow-y-auto p-2 flex flex-col gap-2">
 
-        {/* Empty state */}
+      
         {tasks.length === 0 && !isOver && (
           <div className="flex flex-col items-center justify-center h-full gap-2 text-gray-300 py-10">
             <div className="text-4xl">{config.empty}</div>
@@ -114,7 +114,7 @@ export default function KanbanColumn({
           </div>
         )}
 
-        {/* Drop hint */}
+      
         {tasks.length === 0 && isOver && (
           <div className="
             flex flex-col items-center justify-center
@@ -127,7 +127,7 @@ export default function KanbanColumn({
           </div>
         )}
 
-        {/* Task cards */}
+      
         {tasks.map((task) => (
           <TaskCard
             key={task.id}

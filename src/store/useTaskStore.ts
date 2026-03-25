@@ -4,22 +4,13 @@ import { generateTasks } from '../utils/seedData'
 import type { ActiveUser } from '../simulation/mockPresence'
 
 type TaskStore = {
-  // ── DATA ──────────────────────────────────────────
   tasks: Task[]
-
-  // ── ACTIVE VIEW ───────────────────────────────────
   activeView: 'kanban' | 'list' | 'timeline'
   setActiveView: (view: 'kanban' | 'list' | 'timeline') => void
-
-  // ── FILTERS ───────────────────────────────────────
   filters: Filters
   setFilters: (filters: Partial<Filters>) => void
   clearFilters: () => void
-
-  // ── TASK ACTIONS ──────────────────────────────────
   updateTaskStatus: (taskId: string, newStatus: Status) => void
-
-  // ── PRESENCE ──────────────────────────────────────
   activeUsers:    ActiveUser[]
   setActiveUsers: (users: ActiveUser[]) => void
 }
@@ -55,7 +46,7 @@ export const useTaskStore = create<TaskStore>((set) => ({
       ),
     })),
 
-  // ── Presence ──────────────────────────────────────
+
   activeUsers:    [],
   setActiveUsers: (users) => set({ activeUsers: users }),
 

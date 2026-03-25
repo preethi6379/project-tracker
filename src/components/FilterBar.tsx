@@ -3,7 +3,8 @@ import MultiSelect from './MultiSelect'
 import { USERS } from '../utils/seedData'
 import type { Status, Priority } from '../types/task.types'
 
-// Status options for dropdown
+
+
 const STATUS_OPTIONS = [
   { value: 'todo',       label: 'To Do'       },
   { value: 'inprogress', label: 'In Progress' },
@@ -11,7 +12,8 @@ const STATUS_OPTIONS = [
   { value: 'done',       label: 'Done'        },
 ]
 
-// Priority options with colours
+
+
 const PRIORITY_OPTIONS = [
   { value: 'critical', label: 'Critical', color: '#ef4444' },
   { value: 'high',     label: 'High',     color: '#f97316' },
@@ -19,7 +21,8 @@ const PRIORITY_OPTIONS = [
   { value: 'low',      label: 'Low',      color: '#22c55e' },
 ]
 
-// Assignee options from our 6 users
+
+
 const ASSIGNEE_OPTIONS = USERS.map((u) => ({
   value: u.id,
   label: u.name,
@@ -29,7 +32,8 @@ const ASSIGNEE_OPTIONS = USERS.map((u) => ({
 export default function FilterBar() {
   const { filters, setFilters, clearFilters } = useUrlFilters()
 
-  // Check if any filter is active
+  
+  
   const hasActiveFilters =
     filters.status.length    > 0 ||
     filters.priority.length  > 0 ||
@@ -40,7 +44,8 @@ export default function FilterBar() {
   return (
     <div className="flex items-center gap-2 px-4 py-3 bg-white border-b border-gray-200 flex-wrap">
 
-      {/* ── Status filter ── */}
+      
+      
       <MultiSelect
         label="Status"
         options={STATUS_OPTIONS}
@@ -49,8 +54,6 @@ export default function FilterBar() {
           setFilters({ status: values as Status[] })
         }
       />
-
-      {/* ── Priority filter ── */}
       <MultiSelect
         label="Priority"
         options={PRIORITY_OPTIONS}
@@ -60,7 +63,8 @@ export default function FilterBar() {
         }
       />
 
-      {/* ── Assignee filter ── */}
+      
+      
       <MultiSelect
         label="Assignee"
         options={ASSIGNEE_OPTIONS}
@@ -70,7 +74,8 @@ export default function FilterBar() {
         }
       />
 
-      {/* ── Date range ── */}
+     
+     
       <div className="flex items-center gap-1">
         <span className="text-xs text-gray-400 font-medium">From</span>
         <input
@@ -98,8 +103,8 @@ export default function FilterBar() {
         />
       </div>
 
-      {/* ── Clear all button ── */}
-      {/* Only shows when at least one filter is active */}
+      
+      
       {hasActiveFilters && (
         <button
           onClick={clearFilters}

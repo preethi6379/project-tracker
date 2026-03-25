@@ -24,19 +24,14 @@ export default function TimelineView() {
 
   const filteredTasks = getFilteredTasks(tasks, filters)
   const today         = getToday()
-
-  // Refs for synced scrolling
   const sidebarRef  = useRef<HTMLDivElement>(null)
   const timelineRef = useRef<HTMLDivElement>(null)
-
-  // When timeline scrolls vertically — sync sidebar
   const handleTimelineScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     if (sidebarRef.current) {
       sidebarRef.current.scrollTop = (e.target as HTMLDivElement).scrollTop
     }
   }, [])
 
-  // When sidebar scrolls — sync timeline
   const handleSidebarScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     if (timelineRef.current) {
       timelineRef.current.scrollTop = (e.target as HTMLDivElement).scrollTop
@@ -68,8 +63,6 @@ export default function TimelineView() {
       className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col"
       style={{ height: 'calc(100vh - 180px)' }}
     >
-
-      {/* ── Month + Year Title + Legend ── */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-gray-50 shrink-0">
         <div className="flex items-center gap-3">
           <h2 className="text-base font-bold text-gray-800">
@@ -79,8 +72,6 @@ export default function TimelineView() {
             Today: {todayDay} {MONTH_NAMES[month]}
           </span>
         </div>
-
-        {/* Priority legend */}
         <div className="flex items-center gap-3">
           {Object.entries(PRIORITY_COLORS).map(([p, c]) => (
             <div key={p} className="flex items-center gap-1">
@@ -93,19 +84,13 @@ export default function TimelineView() {
           ))}
         </div>
       </div>
-
-      {/* ── Day numbers header ── */}
       <div className="flex border-b border-gray-200 bg-gray-50 shrink-0">
-
-        {/* Sidebar label */}
         <div
           className="shrink-0 px-4 py-2 font-semibold text-gray-500 text-xs border-r border-gray-200 flex items-center"
           style={{ width: SIDEBAR_WIDTH }}
         >
           TASK
         </div>
-
-        {/* Day numbers — matches timeline scroll */}
         <div className="overflow-x-hidden flex-1">
           <div className="flex" style={{ width: timelineWidth }}>
             {days.map((day) => {
@@ -139,17 +124,15 @@ export default function TimelineView() {
         </div>
       </div>
 
-      {/* ── Main area ── */}
+    
+    
       <div className="flex flex-1 overflow-hidden">
-
-        {/* ── Sidebar — synced scroll ── */}
         <div
           ref={sidebarRef}
           onScroll={handleSidebarScroll}
           className="shrink-0 border-r border-gray-200 overflow-y-auto"
           style={{
             width: SIDEBAR_WIDTH,
-            // Hide scrollbar visually but keep functional
             scrollbarWidth: 'none',
           }}
         >
@@ -178,16 +161,12 @@ export default function TimelineView() {
             </div>
           ))}
         </div>
-
-        {/* ── Timeline — scrolls both X and Y ── */}
         <div
           ref={timelineRef}
           onScroll={handleTimelineScroll}
           className="flex-1 overflow-auto"
         >
           <div style={{ width: timelineWidth, position: 'relative' }}>
-
-            {/* ── Today line — bold red ── */}
             <div
               style={{
                 position:   'absolute',
@@ -197,11 +176,9 @@ export default function TimelineView() {
                 width:      '2px',
                 zIndex:     20,
                 background: '#3b82f6',
-                // Make line full height of all tasks
                 minHeight:  filteredTasks.length * ROW_HEIGHT,
               }}
             >
-              {/* Triangle marker at top */}
               <div style={{
                 position:    'absolute',
                 top:         0,
@@ -214,8 +191,6 @@ export default function TimelineView() {
                 borderTop:   '8px solid #3b82f6',
               }}/>
             </div>
-
-            {/* ── Task rows ── */}
             {filteredTasks.map((task, index) => {
               const startDay = dateToDayNumber(task.startDate)
               const endDay   = dateToDayNumber(task.dueDate)
@@ -250,7 +225,6 @@ export default function TimelineView() {
                     ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/40'}
                   `}
                 >
-                  {/* Weekend shading */}
                   {days.map((day) => {
                     const dow = new Date(
                       `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`
@@ -270,8 +244,6 @@ export default function TimelineView() {
                       />
                     )
                   })}
-
-                  {/* ── Bar ── */}
                   {hasBar && (
                     <div
                       style={{
@@ -306,8 +278,6 @@ export default function TimelineView() {
                       </span>
                     </div>
                   )}
-
-                  {/* ── Dot (no start date) ── */}
                   {hasDot && (
                     <div
                       style={{
@@ -346,8 +316,6 @@ export default function TimelineView() {
           </div>
         </div>
       </div>
-
-      {/* ── Footer ── */}
       <div className="px-4 py-2 bg-gray-50 border-t border-gray-200 text-xs text-gray-400 shrink-0 flex items-center justify-between">
         <span>{filteredTasks.length} tasks</span>
         <span>← scroll horizontally to see full month →</span>

@@ -11,8 +11,6 @@ type Props = {
 
 export default function AvatarStack({ users }: Props) {
   if (users.length === 0) return null
-
-  // Max 2 shown, rest as +N
   const shown    = users.slice(0, 2)
   const overflow = users.length - shown.length
 

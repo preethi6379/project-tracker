@@ -31,7 +31,6 @@ export default function KanbanView() {
       onPointerMove={handleDragMove}
       onPointerUp={handleDragEnd}
     >
-      {/* Columns — take full height */}
       <div className="
         flex-1 flex gap-3
         overflow-x-auto overflow-y-hidden
